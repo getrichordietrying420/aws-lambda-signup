@@ -1,10 +1,6 @@
 import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
 var client = null
-if (process.env.PRODUCTION == "true") {
-    client = new DynamoDBClient({ region: process.env.CUSTOM_AWS_REGION });
-} else {
-    client = new DynamoDBClient({ region: "REGION", endpoint: "http://dynamodb:8000" });
-}
+client = new DynamoDBClient({ region: "eu-central-1" });
 
 export const newsletterSignupLambdaHandler = async (event) => {
     const { email, source } = JSON.parse(event.body);  // Expecting a JSON payload with email and name
