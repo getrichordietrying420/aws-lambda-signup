@@ -1,0 +1,77 @@
+# Node modules - usually bundled in a deployment package
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build and deployment directories
+dist/
+build/
+.zip
+
+# Environment variables
+.env
+.env.local
+
+# AWS credentials
+.aws/
+*.pem
+
+# IDE/editor directories and files
+.vscode/
+.idea/
+*.swp
+
+# System files
+.DS_Store
+Thumbs.db
+
+# AWS Lambda-specific
+*.zip            # If you're zipping deployment packages manually
+coverage/        # If using a testing library that generates coverage reports
+
+# AWS SAM or CDK files (if applicable)
+.template/
+.cdk.out/# Node modules - usually bundled in a deployment package
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build and deployment directories
+dist/
+build/
+.zip
+
+# Environment variables
+.env
+.env.local
+
+# AWS credentials
+.aws/
+*.pem
+
+# IDE/editor directories and files
+.vscode/
+.idea/
+*.swp
+
+# System files
+.DS_Store
+Thumbs.db
+
+# AWS Lambda-specific
+*.zip            # If you're zipping deployment packages manually
+coverage/        # If using a testing library that generates coverage reports
+
+# AWS SAM or CDK files (if applicable)
+.template/
+.cdk.out/

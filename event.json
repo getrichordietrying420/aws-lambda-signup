@@ -1,0 +1,13 @@
+{
+  "resource": "/path",
+  "path": "/path",
+  "httpMethod": "GET",
+  "headers": {
+    "header1": "value1"
+  },
+  "queryStringParameters": {
+    "queryParam1": "value1"
+  },
+  "body": "{\"email\": \"thachlinhphan\", \"source\": \"yes\"}",
+  "isBase64Encoded": false
+}
