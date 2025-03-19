@@ -22,7 +22,7 @@ Resources:
   newsletterSignupFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/newsletter-signup-lambda.newsletterSignupLambdaHandler
+      Handler: newsletter-signup-lambda.newsletterSignupLambdaHandler
       Runtime: nodejs18.x
       Architectures:
         - x86_64
