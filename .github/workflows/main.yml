@@ -30,3 +30,4 @@ jobs:  #Workflow run is made up of one or more jobs
         run: |
           zip -j deploy.zip ./* #--> Zip the Code As we know lambda function accept the zip file.
           aws lambda update-function-code --function-name=newsletterSignupFunction --zip-file=fileb://deploy.zip 
+          aws lambda update-function-code --function-name=newsletterSignupCorsFunction --zip-file=fileb://deploy.zip 
