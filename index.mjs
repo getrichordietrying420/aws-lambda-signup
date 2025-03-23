@@ -1,9 +1,44 @@
 import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
-var client = null
-client = new DynamoDBClient({ region: "eu-central-1" });
+const config = {
+    region: process.env.AWS_REGION
+}
 
-export const newsletterSignupLambdaHandler = async (event) => {
+if (process.env.DB_URL) {
+    config.endpoint = process.env.DB_URL;
+}
+var client = null
+client = new DynamoDBClient(config);
+
+export const cors = async (_) => {
+    const response = {
+        statusCode: 200,
+        headers: {
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
+        body: JSON.stringify('Hello from Lambda!'),
+    };
+    return response;
+}
+export const index = async (event) => {
     const { email, source } = JSON.parse(event.body);  // Expecting a JSON payload with email and name
+    if (email == null) {
+        return {
+            statusCode: 422,
+            body: JSON.stringify({
+                message: 'Email not defined',
+            }),
+        };
+    }
+    if (source == null) {
+        return {
+            statusCode: 422,
+            body: JSON.stringify({
+                message: 'Source not defined',
+            }),
+        };
+    }
 
     const params = {
         Item: {
@@ -33,13 +68,10 @@ export const newsletterSignupLambdaHandler = async (event) => {
         };
 
     } catch (error) {
-        console.log(error);
         return {
             statusCode: 400,
             body: JSON.stringify({
                 message: error.message,
-                email: email,
-                source: source,
             }),
         };
     }

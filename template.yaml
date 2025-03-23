@@ -17,12 +17,33 @@ Transform:
 Resources:
   # Each Lambda function is defined by properties:
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-
-  # This is a Lambda function config associated with the source code: hello-from-lambda.js
   newsletterSignupFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: newsletter-signup-lambda.newsletterSignupLambdaHandler
+      Handler: index.index
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      MemorySize: 128
+      Timeout: 100
+      Description: A Lambda function that returns a static string.
+      Policies:
+        # Give Lambda basic execution Permission to the helloFromLambda
+        - AWSLambdaBasicExecutionRole
+      Environment:
+        Variables:
+          DB_URL:
+      Events:
+        ApiRequest:
+          Type: Api
+          Properties:
+            Path: /newsletterSignupFunction
+            Method: POST
+
+  newsletterSignupCorsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.cors
       Runtime: nodejs18.x
       Architectures:
         - x86_64
@@ -36,5 +57,5 @@ Resources:
         ApiRequest:
           Type: Api
           Properties:
-            Path: /hello
-            Method: POST
+            Path: /newsletterSignupFunction
+            Method: OPTIONS

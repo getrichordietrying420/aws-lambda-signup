@@ -1,0 +1,5 @@
+{
+  "newsletterSignupFunction": {
+    "DB_URL": "http://dynamodb:8000"
+  }
+}
