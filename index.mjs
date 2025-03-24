@@ -2,6 +2,11 @@ import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
 const config = {
     region: process.env.AWS_REGION
 }
+const corsHeaders = {
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "OPTIONS,POST"
+}
 
 if (process.env.DB_URL) {
     config.endpoint = process.env.DB_URL;
@@ -12,11 +17,7 @@ client = new DynamoDBClient(config);
 export const cors = async (_) => {
     const response = {
         statusCode: 200,
-        headers: {
-            "Access-Control-Allow-Headers": "Content-Type",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-        },
+        headers: corsHeaders,
         body: JSON.stringify('Hello from Lambda!'),
     };
     return response;
@@ -26,6 +27,7 @@ export const index = async (event) => {
     if (email == null) {
         return {
             statusCode: 422,
+            headers: corsHeaders,
             body: JSON.stringify({
                 message: 'Email not defined',
             }),
@@ -34,6 +36,7 @@ export const index = async (event) => {
     if (source == null) {
         return {
             statusCode: 422,
+            headers: corsHeaders,
             body: JSON.stringify({
                 message: 'Source not defined',
             }),
@@ -60,6 +63,7 @@ export const index = async (event) => {
         await client.send(command);
         return {
             statusCode: 200,
+            headers: corsHeaders,
             body: JSON.stringify({
                 message: 'User data saved successfully!',
                 email: email,
@@ -70,6 +74,7 @@ export const index = async (event) => {
     } catch (error) {
         return {
             statusCode: 400,
+            headers: corsHeaders,
             body: JSON.stringify({
                 message: error.message,
             }),

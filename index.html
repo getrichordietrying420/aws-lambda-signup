@@ -16,7 +16,7 @@
         window.onload = ()=>{
         document.getElementById("emailForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevent default form submission
-            const api = "http://localhost:3000/newsletterSignupFunction";          
+            const api = "https://newsletter.skiby.team/newsletterSignupFunction";          
             const email = document.getElementById("email").value;
             const source = "test";
             fetch(api, {
